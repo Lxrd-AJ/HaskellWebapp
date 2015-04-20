@@ -82,7 +82,7 @@ library
                  , vector
                  , time
                  , HTTP
-                 , wai
+                 
 
 executable         HaskellWebapp
     if flag(library-only)
