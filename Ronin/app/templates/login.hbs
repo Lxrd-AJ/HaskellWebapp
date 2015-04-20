@@ -1,0 +1,21 @@
+<div class="navbar navbar-default container ">
+	{{#link-to 'index'}}<h1 class="">Home</h1>{{/link-to}}
+    <ul class="nav navbar-inner pull-right">
+        <li>{{#link-to 'login'}}Login{{/link-to}}</li>
+    </ul>
+</div>
+
+<div class="container">
+	<form class="form-horizontal">
+    	<div class="input-group col-xs-4">
+                <span class="input-group-addon">Username</span>
+                {{input type="text" placeholder="email" value=username class="form-control" id="email"}}
+        </div>
+        <div class="input-group col-xs-4">
+                <span class="input-group-addon">Password</span>
+                {{input type="password" placeholder="Password" value=password class="form-control"
+                  action='login' on='enter' id="password"}}
+        </div>
+		<button class="btn btn-default" type="button" {{action 'login'}}>Log in</button>
+    </form>
+</div>
