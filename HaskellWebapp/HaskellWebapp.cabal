@@ -40,6 +40,7 @@ library
                 GADTs
                 GeneralizedNewtypeDeriving
                 FlexibleContexts
+                FlexibleInstances
                 EmptyDataDecls
                 NoMonomorphismRestriction
                 DeriveDataTypeable
@@ -84,6 +85,8 @@ library
                  , vector
                  , time
                  , HTTP
+                 , old-locale
+                 , iso8601-time                  
 
                  
 

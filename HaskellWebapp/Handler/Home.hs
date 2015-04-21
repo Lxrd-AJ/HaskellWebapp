@@ -13,16 +13,11 @@ import Data.Aeson
 import GHC.Generics
 import Network.HTTP.Conduit( simpleHttp )
 import qualified Data.List as LS
-import Data.Time.Format     (parseTime,formatTime)
 import Data.Time.Clock      (UTCTime)
---import System.Locale        (defaultTimeLocale)
 import Data.Maybe
 import qualified Data.Text as T 
-
-
--- This is a handler function for the GET request method on the HomeR
--- resource pattern. All of your resource patterns are defined in
--- config/routes
+import Control.Concurrent (forkIO)
+import Data.Time.ISO8601 -- [docs] := https://hackage.haskell.org/package/iso8601-time-0.1.3/docs/Data-Time-ISO8601.html
 
 -- /
 -- Get the response
@@ -31,34 +26,36 @@ import qualified Data.Text as T
 getJSON :: IO BS.ByteString
 getJSON = simpleHttp "http://www.phoric.eu/temperature"
 
-getTemperatures :: IO Text
-getTemperatures = do 
+unwrapTemperatures :: Temperatures -> [Temperature]
+unwrapTemperatures (Temperatures {temperatures = xs}) = xs 
+
+getAndStoreTemperatures :: IO ()
+getAndStoreTemperatures = do 
         d <- (eitherDecode <$> getJSON) :: IO (Either String Temperatures)
         case d of 
-            Left error -> return (T.pack error)
-            Right result -> return $ T.pack . unwords $ (averageTemp result)
+            Left error -> return ()
+            Right result -> (storeTemperatures result)
 
-unwarpTemperatures :: Temperatures -> [Temperature]
-unwarpTemperatures (Temperatures {temperatures = xs}) = xs 
+storeTemperatures :: Temperatures -> IO ()
+storeTemperatures temprs = do 
+    temps <- unwrapTemperatures temprs 
+    (map storeTemperature temps)
 
-getDate :: Temperature -> String
-getDate (Temperature {date = d, temperature = temp }) = T.unpack d
+storeTemperature :: Temperature -> Handler ()
+storeTemperature (Temperature d t l) = do
+    tempID <- runDB $ insert $ Temperature d t l
+    return () 
 
-myDate :: [Temperature] -> [String]
-myDate [] = []
+getDate :: Temperature -> Maybe UTCTime
+getDate (Temperature d _ Nothing) = parseISO8601 d
+
+myDate :: [Temperature] -> [Maybe UTCTime]
+myDate [] = [Nothing]
 myDate (x:xs) = getDate x : myDate xs 
 
-averageTemp :: Temperatures -> [String] 
-averageTemp ts = do
-    temps <- unwarpTemperatures ts 
-    myDate [temps]
-
-retrieveResponse :: IO String 
-retrieveResponse = do 
-    result <- HP.simpleHTTP (HP.getRequest "http://www.phoric.eu/temperature") 
-    (HP.getResponseBody result) 
-
+-- fetch temperature data and store it, then 
 getHomeR :: Handler Text
-getHomeR = lift getTemperatures
+getHomeR = do
+    _ <- lift (forkIO getAndStoreTemperatures)
+    return "Hello World"
 
--- try using addScriptRemote
