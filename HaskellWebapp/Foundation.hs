@@ -21,6 +21,22 @@ data App = App
     , appLogger      :: Logger
     }
 
+
+data Temperature = Temperature {
+    date :: Text,
+    temperature :: Int
+} deriving (Show,Generic)
+
+data Temperatures = Temperatures {
+    temperatures :: [Temperature]
+} deriving (Show,Generic)
+
+instance FromJSON Temperature 
+instance FromJSON Temperatures  
+instance ToJSON Temperature   
+instance ToJSON Temperatures  
+
+
 instance HasHttpManager App where
     getHttpManager = appHttpManager
 

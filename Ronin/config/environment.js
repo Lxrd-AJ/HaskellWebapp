@@ -51,7 +51,8 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+      ENV.baseURL = "/webapp";
+      ENV.locationType = "none";
   }
 
   return ENV;
