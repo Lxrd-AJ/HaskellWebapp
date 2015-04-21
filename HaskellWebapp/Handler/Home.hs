@@ -17,6 +17,7 @@ import Data.Time.Format     (parseTime,formatTime)
 import Data.Time.Clock      (UTCTime)
 --import System.Locale        (defaultTimeLocale)
 import Data.Maybe
+import qualified Data.Text as T 
 
 
 -- This is a handler function for the GET request method on the HomeR
@@ -30,20 +31,12 @@ import Data.Maybe
 getJSON :: IO BS.ByteString
 getJSON = simpleHttp "http://www.phoric.eu/temperature"
 
-{-
-makeTimeString :: UTCTime -> String
-makeTimeString = formatTime defaultTimeLocale "%FT%T%QZ"
-
-makeStringTime :: String -> Maybe UTCTime
-makeStringTime = parseTime defaultTimeLocale "%FT%T%QZ"
--}
-
 getTemperatures :: IO Text
 getTemperatures = do 
         d <- (eitherDecode <$> getJSON) :: IO (Either String Temperatures)
         case d of 
             Left error -> return (T.pack error)
-            Right result -> return (averageTemp result)
+            Right result -> return $ T.pack . unwords $ (averageTemp result)
 
 unwarpTemperatures :: Temperatures -> [Temperature]
 unwarpTemperatures (Temperatures {temperatures = xs}) = xs 
