@@ -87,7 +87,7 @@ library
                  , HTTP
                  , old-locale
                  , iso8601-time                  
-
+                 , wai 
                  
 
 executable         HaskellWebapp
