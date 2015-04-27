@@ -18,10 +18,13 @@ import qualified Data.Text as T
 import Control.Concurrent (forkIO)
 import Data.Time.ISO8601 -- [docs] := https://hackage.haskell.org/package/iso8601-time-0.1.3/docs/Data-Time-ISO8601.html
 import Network.Wai ( responseFile )
+import Yesod.Static
 -- /
 -- Get the response
 -- Store it in the database( fork a thread to do this )
 -- return the EmberJS webapp
+
+--staticFiles "static/webapp"
 
 getJSON :: IO BS.ByteString
 getJSON = simpleHttp $ "http://www.phoric.eu/temperature" -- unsafeperformio
@@ -33,9 +36,9 @@ getAndStoreTemperatures :: IO [Handler (Key Temperature)]
 getAndStoreTemperatures = do  
         decoded <- (eitherDecode <$> getJSON) :: IO (Either String Temperatures)
         case decoded of 
-            Right result -> do -- (storeTemperatures $ result) >>= putStrLn "Done"
+            Right result -> do 
                 return $ storeTemperatures result
-            Left error -> return $ [] -- putStrLn (pack error)
+            Left _ -> return $ [] -- If an error occurred, return
 
 storeTemperatures :: Temperatures -> [Handler (Key Temperature)]
 storeTemperatures temps = map storeTemperature (unwrapTemperatures temps)
@@ -51,8 +54,9 @@ myDate [] = [Nothing]
 myDate (x:xs) = getDate x : myDate xs 
 
 -- fetch temperature data and store it, then 
-getHomeR :: Handler Html
+getHomeR :: Handler TypedContent
 getHomeR = do
     _ <- lift getAndStoreTemperatures
-    defaultLayout $(widgetFile "home")
+    sendFile "text/html" "static/webapp/index.html"
+    -- defaultLayout $(widgetFile "home")
 
