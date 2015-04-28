@@ -6,3 +6,4 @@
 
 / HomeR GET
 /temperature TemperatureR GET
+/temperature/stats StatsR GET
