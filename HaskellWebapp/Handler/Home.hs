@@ -33,7 +33,7 @@ getAndStoreTemperatures = do
 storeTemperatures :: Temperatures -> [Handler (Key Temperature)]
 storeTemperatures temps = do -- map storeTemperature (unwrapTemperatures temps)
 	res <- temperatures temps -- unwrapTemperatures temps
-	map storeTemperature [res] -- FIXME Not working
+	map storeTemperature [res] -- FIXME Not working   [storeTemperature tmp | tmp <- res]
     
 storeTemperature :: Temperature -> Handler (Key Temperature)
 storeTemperature (Temperature d t l) = runDB $ insert $ Temperature d t l

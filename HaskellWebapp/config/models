@@ -1,7 +1,7 @@
 User
-    ident Text
+    username Text
     password Text Maybe
-    UniqueUser ident
+    UniqueUser username
     deriving Typeable Generic Show
 Email
     email Text
@@ -16,6 +16,6 @@ Temperature json
 	date String
 	temperature Int
 	location LocationId Maybe
-	deriving Show Generic
+	deriving Show Generic 
 
  -- By default this file is used in Model.hs (which is imported by Foundation.hs)
