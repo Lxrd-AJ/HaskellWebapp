@@ -22,7 +22,7 @@ module.exports = function(environment) {
           'default-src': "'none'",
           'script-src': "'self' 'unsafe-inline' 'unsafe-eval'",
           'font-src': "'self'",
-          'connect-src': "'self' http://127.0.0.1:3000",
+          'connect-src': "'self' http://127.0.0.1:3000 http://127.0.0.1:4200",
           'img-src': "'self'",
           'style-src': "'self' 'unsafe-inline' http://fonts.googleapis.com",
           'frame-src': "'none'"

@@ -8,9 +8,10 @@ getUserR = do
 	users <- runDB $ selectList ([] :: [Filter User]) []
 	returnJson $ object [ "users" .= (stripEntities users) ]
 
--- GEt a particular user
+-- GEt a particular user / Login a user
 getLoginUserR :: Text -> Text -> Handler Value
 getLoginUserR username password = do 
+	addHeader "Access-Control-Allow-Origin" "*"
 	probsUser <- runDB $ getBy $ UniqueUser username password
 	case probsUser of 
 		Nothing -> sendResponseStatus status500 ("USER_NOT_EXIST"::Text)

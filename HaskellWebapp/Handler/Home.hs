@@ -14,20 +14,22 @@ import Network.HTTP.Conduit( simpleHttp )
 import Data.Maybe
 import qualified Data.Text as T 
 
-getJSON :: IO BS.ByteString
-getJSON = simpleHttp $ "http://www.phoric.eu/temperature" 
+ 
 
 {-
+
+getJSON :: IO BS.ByteString
+getJSON = 
+
+	
 unwrapTemperatures :: Temperatures -> [Temperature]
 unwrapTemperatures ts = temperatures ts -- (Temperatures {temperatures = xs})
--}
 
 getAndStoreTemperatures :: IO [Handler (Key Temperature)]   
 getAndStoreTemperatures = do  
-        decoded <- (eitherDecode <$> getJSON) :: IO (Either String Temperatures)
+        decoded <- eitherDecode <$> (simpleHttp $ "http://www.phoric.eu/temperature") 
         case decoded of 
-            Right result -> do 
-                return $ storeTemperatures result
+            Right result -> return $ storeTemperatures result
             Left _ -> return $ [] -- If an error occurred, fail silently and return
 
 storeTemperatures :: Temperatures -> [Handler (Key Temperature)]
@@ -37,11 +39,19 @@ storeTemperatures temps = do -- map storeTemperature (unwrapTemperatures temps)
     
 storeTemperature :: Temperature -> Handler (Key Temperature)
 storeTemperature (Temperature d t l) = runDB $ insert $ Temperature d t l
-
+-}
 -- fetch temperature data and store it, then 
 getHomeR :: Handler TypedContent
 getHomeR = do
-    _ <- lift getAndStoreTemperatures                    -- Get the response & Store it in the database
-    sendFile "text/html" "static/webapp/index.html"      -- return the EmberJS webapp
+    decoded <- eitherDecode <$> (simpleHttp $ "http://www.phoric.eu/temperature") 
+    case decoded of 
+        Right result -> (storeTemperatures (temperatures result))
+        Left _ -> sendFile "text" "Failed" -- If an error occurred, fail silently and return  
+    where 
+    	storeTemperatures [] = sendFile "text/html" "static/webapp/index.html"      -- return the EmberJS webapp
+    	storeTemperatures (x:xs) = do 
+    		_ <- runDB $ insert x 
+    		storeTemperatures xs 
 
+-- _ <- lift getAndStoreTemperatures                    -- Get the response & Store it in the database
 
