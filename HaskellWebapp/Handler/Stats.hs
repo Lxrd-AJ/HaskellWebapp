@@ -19,12 +19,7 @@ myDate (x:xs) = getDate x : myDate xs
 temperature :: Temperature -> Int
 temperature (Temperature _ temp _) = temp
 
-stripEntity :: Entity Temperature -> Temperature
-stripEntity (Entity _ temp) = temp
 
-stripEntities :: [Entity Temperature] -> [Temperature]
-stripEntities [] = []
-stripEntities (x:xs) = stripEntity x : stripEntities xs 
 
 -- Get all temp data 
 -- Perform some processing & return a few Stats 

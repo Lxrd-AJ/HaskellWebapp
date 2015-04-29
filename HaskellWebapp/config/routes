@@ -5,6 +5,11 @@
 /robots.txt RobotsR GET
 
 / HomeR GET
+
 /temperature TemperatureR GET
 /temperature/stats StatsR GET
-/user UserR GET POST
+
+/user UserR GET 
+/user/username/#Text/password/#Text LoginUserR GET POST
+
+/user/#UserId/location/#Text NewLocationR POST

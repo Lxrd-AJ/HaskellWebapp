@@ -121,7 +121,7 @@ instance YesodAuth App where
     logoutDest _ = HomeR
     -- Override the above two destinations when a Referer: header is present
     redirectToReferer _ = True
-
+    {-
     getAuthId creds = runDB $ do
         x <- getBy $ UniqueUser $ credsIdent creds
         case x of
@@ -130,7 +130,7 @@ instance YesodAuth App where
                 { userUsername = credsIdent creds
                 , userPassword = Nothing
                 }
-
+    -}
     -- You can add other plugins like BrowserID, email or OAuth here
     authPlugins _ = [authBrowserId def]
 

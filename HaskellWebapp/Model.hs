@@ -17,6 +17,8 @@ data Temperatures = Temperatures {
 instance FromJSON Temperatures    
 instance ToJSON Temperatures
 
+instance ToJSON User  
+
 -- NB: For the current context, we simply use ONLY temperature values while ignoring dates for comparison
 instance Eq Temperature where
 	(Temperature _ x _) == (Temperature _ y _) = x == y  

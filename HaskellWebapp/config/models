@@ -1,16 +1,12 @@
 User
     username Text
-    password Text Maybe
-    UniqueUser username
+    password Text 
+    UniqueUser username password 
     deriving Typeable Generic Show
-Email
-    email Text
-    user UserId Maybe
-    verkey Text Maybe
-    UniqueEmail email
 Location json
-	town String 
-	userId UserId
+    userId UserId
+	town Text
+    UniqueLocation town 
 	deriving Show Generic
 Temperature json
 	date String

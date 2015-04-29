@@ -15,7 +15,7 @@ import Data.Maybe
 import qualified Data.Text as T 
 
 getJSON :: IO BS.ByteString
-getJSON = simpleHttp $ "http://www.phoric.eu/temperature" -- unsafeperformio
+getJSON = simpleHttp $ "http://www.phoric.eu/temperature" 
 
 {-
 unwrapTemperatures :: Temperatures -> [Temperature]
