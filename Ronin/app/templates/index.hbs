@@ -6,6 +6,44 @@
 </div>
 
 <div class="">
-	<h1>Hello World</h1>
-	<p>There is no place like home </p>
+	<h1>Awesome Temperature Stats</h1>
+    <ul>
+        <li class="list-group-item">
+            <div class="">Average Temperature </div>
+            <p class="">{{model.average}}</p>
+        </li>
+        <li class="list-group-item">
+            <div>Total Temperature sum</div>
+            <p>{{model.sum}}</p>
+        </li>
+        <li class="list-group-item">
+            <div>Temperature data collected</div>
+            <p>{{model.total}}</p>
+        </li>
+        <li class="list-group-item">
+            <div>Hottest So far</div>
+            <ul>
+                <li class="list-group-item">Date: {{model.highest.date}}</li>
+                <li class="list-group-item">Temperature: {{model.highest.temperature}}</li>
+            </ul>
+        </li>
+        <li class="list-group-item">
+            <div>Coldest Yet!</div>
+            <ul>
+                <li class="list-group-item">Date: {{model.lowest.date}}</li>
+                <li class="list-group-item">Temperature: {{model.lowest.temperature}}</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div>
+    <h1>All Temperatures in the Royal DB</h1>
+    <ul>
+        {{#each temp in model.temperatures}}
+            <li class="list-group-item">
+                <p>Date: {{temp.date}}, temperature: {{temp.temperature}}, Location: {{temp.location}}</p>
+            </li>
+        {{/each}}
+    </ul>
 </div>

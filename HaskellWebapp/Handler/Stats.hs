@@ -25,6 +25,7 @@ temperature (Temperature _ temp _) = temp
 -- Perform some processing & return a few Stats 
 getStatsR :: Handler Value
 getStatsR = do 
+	addHeader "Access-Control-Allow-Origin" "*"
 	temps <- runDB $ selectList ([] :: [Filter Temperature]) []
 	returnJson $ object 
 		[ "sum" .= getSum (stripEntities temps) ,
