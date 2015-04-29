@@ -6,7 +6,7 @@ User
 Location json
     userId UserId
 	town Text
-    UniqueLocation town 
+    UniqueLocation userId town 
 	deriving Show Generic
 Temperature json
 	date String

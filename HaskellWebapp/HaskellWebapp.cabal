@@ -25,6 +25,7 @@ library
                      Handler.Temperature
                      Handler.Stats
                      Handler.User
+                     Handler.Location
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT

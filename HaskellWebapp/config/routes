@@ -6,10 +6,14 @@
 
 / HomeR GET
 
-/temperature TemperatureR GET
 /temperature/stats StatsR GET
+
+/temperature TemperatureR GET
+/temperature/location/#LocationId UserTemperatureR GET
 
 /user UserR GET 
 /user/username/#Text/password/#Text LoginUserR GET POST
-
 /user/#UserId/location/#Text NewLocationR POST
+/user/#UserId/location/#LocationId/temperature/date/#String/temp/#Int NewTemperatureR POST
+
+/user/#UserId/location LocationR GET

@@ -23,7 +23,14 @@ postLoginUserR username password = do
 	returnJson $ object [ "userID" .= userID ]		
 
 
+-- Enter a New location
 postNewLocationR :: UserId -> Text -> Handler Value
 postNewLocationR userID location = do 
 	locationID <- runDB $ insert $ Location userID location
 	returnJson $ object [ "locationID" .= locationID ]
+
+-- Enter a New temperature data for a particular location
+postNewTemperatureR :: UserId -> LocationId -> String -> Int -> Handler Value
+postNewTemperatureR userID locationID tempDate tempVal = do 
+	tempID <- runDB $ insert $ Temperature tempDate tempVal (Just locationID)
+	returnJson $ object [ "temperatureID" .= tempID ]
