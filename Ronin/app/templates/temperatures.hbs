@@ -1,0 +1,10 @@
+<div>
+    <h1>All Temperatures in the Royal DB</h1>
+    <ul>
+        {{#each temp in model}}
+            <li class="list-group-item">
+                <p>Date: {{temp.date}}, temperature: {{temp.temperature}}, Location: {{temp.location}}</p>
+            </li>
+        {{/each}}
+    </ul>
+</div>

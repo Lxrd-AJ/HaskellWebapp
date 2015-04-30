@@ -1,12 +1,8 @@
-<div>
-    {{username}}
+<div class="btn-group pull-right">
+    <button class="btn btn-default">{{#link-to 'user.index'}}All users{{/link-to}}</button>
+    <button class="btn btn-default">{{#link-to 'user.location'}}Location{{/link-to}}</button>
 </div>
 
-<div>
-    <h1>Location</h1>
-
-</div>
-
-<div>
-    <h1>Temperature</h1>
+<div class="clear-fix">
+    {{outlet 'user'}}
 </div>

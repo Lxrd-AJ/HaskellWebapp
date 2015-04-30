@@ -1,9 +1,4 @@
-<div class="navbar navbar-default container ">
-	{{#link-to 'index'}}<h1 class="">Home</h1>{{/link-to}}
-    <ul class="nav navbar-inner pull-right">
-        <li>{{#link-to 'login'}}Login{{/link-to}}</li>
-    </ul>
-</div>
+
 
 <div class="">
 	<h1>Awesome Temperature Stats</h1>
@@ -37,13 +32,3 @@
     </ul>
 </div>
 
-<div>
-    <h1>All Temperatures in the Royal DB</h1>
-    <ul>
-        {{#each temp in model.temperatures}}
-            <li class="list-group-item">
-                <p>Date: {{temp.date}}, temperature: {{temp.temperature}}, Location: {{temp.location}}</p>
-            </li>
-        {{/each}}
-    </ul>
-</div>

@@ -1,0 +1,42 @@
+<div class="pull-left locations">
+    <h1>User Specific Locations & IDs</h1>
+    <ul class="small-center-list">
+        {{#each location in model}}
+            <li class="list-group-item">
+                <p>{{location.town}} <span class="label label-success">ID: {{location.id}}</span> </p>
+            </li>
+        {{/each}}
+    </ul>
+</div>
+
+<div class="pull-right small-width">
+    <div>
+        <p><span class="glyphicon glyphicon-plus label label-primary">Location</span></p>
+        <form class="form-horizontal">
+            <div class="input-group col-xs-10">
+                <span class="input-group-addon">Location Name</span>
+                {{input type="text" placeholder="location name" value=locationName class="form-control"
+                action='submitData' on='enter'}}
+            </div>
+            <button class="btn btn-default"{{action 'submitData'}} type="button">Submit</button>
+        </form>
+    </div>
+    <div class="move-down">
+        <p><span class="glyphicon glyphicon-plus label label-info">Temperature</span></p>
+        <form class="form-horizontal">
+            <div class="input-group col-xs-10">
+                <span class="input-group-addon">Temperature Value</span>
+                {{input type="text" placeholder="temp value" value=tempValue class="form-control"}}
+            </div>
+            <div class="input-group col-xs-10">
+                <span class="input-group-addon">Temperature Date</span>
+                {{input type="date" value=tempDate}}
+            </div>
+            <div class="input-group col-xs-10">
+                <span class="input-group-addon">Location ID</span>
+                {{input type="text" placeholder="enter location ID" value=locationID class="form-control"}}
+            </div>
+            <button class="btn btn-default"{{action 'submitTemperatures'}} type="button">Submit</button>
+        </form>
+    </div>
+</div>

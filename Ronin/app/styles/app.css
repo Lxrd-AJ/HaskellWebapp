@@ -4,12 +4,62 @@
 
 body{
     font-family: 'Open Sans';
-    font-weight: 300;
+    font-weight: 400;
+
     margin-left: auto;
     margin-right: auto;
 }
 
-p{
+
+.clear-fix{
+    clear: both;
+}
+
+.schmite {
+    background-color: #ecf0f1;
+}
+
+footer{
+    border-top: 1px solid #bdc3c7;
+}
+
+.center{
+    text-align: center;
+}
+
+h1 {
     font-family: 'Lato';
-    font-weight: 300;
+    font-size: 4.5em;
+    font-weight: 100
+}
+
+.input-group
+{
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.input-group-addon
+{
+    width: 15%;
+    text-align: right;
+}
+
+.small-center-list {
+    width: 45%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.small-width {
+    margin-top: 5%;
+    width: 30%;
+}
+
+.locations {
+
+}
+
+.move-down{
+    margin-top: 6%;
 }

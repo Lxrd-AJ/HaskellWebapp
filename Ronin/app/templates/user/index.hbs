@@ -1,0 +1,10 @@
+<div>
+    <h1 class="center">All Users in the DB</h1>
+    <ul class="small-center-list">
+        {{#each user in model.users}}
+            <li class="list-group-item">
+                <p>{{user.userUsername}}</p>
+            </li>
+        {{/each}}
+    </ul>
+</div>

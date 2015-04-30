@@ -15,31 +15,6 @@ import Data.Maybe
 import qualified Data.Text as T 
 
  
-
-{-
-
-getJSON :: IO BS.ByteString
-getJSON = 
-
-	
-unwrapTemperatures :: Temperatures -> [Temperature]
-unwrapTemperatures ts = temperatures ts -- (Temperatures {temperatures = xs})
-
-getAndStoreTemperatures :: IO [Handler (Key Temperature)]   
-getAndStoreTemperatures = do  
-        decoded <- eitherDecode <$> (simpleHttp $ "http://www.phoric.eu/temperature") 
-        case decoded of 
-            Right result -> return $ storeTemperatures result
-            Left _ -> return $ [] -- If an error occurred, fail silently and return
-
-storeTemperatures :: Temperatures -> [Handler (Key Temperature)]
-storeTemperatures temps = do -- map storeTemperature (unwrapTemperatures temps)
-	res <- temperatures temps -- unwrapTemperatures temps
-	map storeTemperature [res] -- FIXME Not working   [storeTemperature tmp | tmp <- res]
-    
-storeTemperature :: Temperature -> Handler (Key Temperature)
-storeTemperature (Temperature d t l) = runDB $ insert $ Temperature d t l
--}
 -- fetch temperature data and store it, then 
 getHomeR :: Handler TypedContent
 getHomeR = do
@@ -53,5 +28,4 @@ getHomeR = do
     		_ <- runDB $ insert x 
     		storeTemperatures xs 
 
--- _ <- lift getAndStoreTemperatures                    -- Get the response & Store it in the database
 

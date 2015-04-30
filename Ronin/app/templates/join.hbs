@@ -1,0 +1,18 @@
+<div class="container">
+    <form class="form-horizontal">
+        <div class="input-group col-xs-10">
+            <span class="input-group-addon">Username</span>
+            {{input type="text" placeholder="User name" value=username class="form-control "}}
+        </div>
+        <div class="input-group col-xs-10">
+            <span class="input-group-addon">Password</span>
+            {{input type="password" placeholder="Password" value=password class="form-control"}}
+        </div>
+
+        <p class="disclaimer">
+            By signing up ypu agree to provide us with data and We wont bother writing a lot of boring
+            legal stuff cuz we know you won't read it
+        </p>
+        <button class="btn btn-default"{{action 'submitData'}} type="button">Submit</button>
+    </form>
+</div>
