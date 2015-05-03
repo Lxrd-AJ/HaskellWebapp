@@ -32,6 +32,7 @@ cabal build
 ```
 The executable is then available at `HaskellWebapp/dist/HaskellWebapp/HaskellWebapp` .
 To deploy it on a live server, just upload
+
 1. The executable
 2. The entire `config/*` folder
 3. The entire `static/*` folder
