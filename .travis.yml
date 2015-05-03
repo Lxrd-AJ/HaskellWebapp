@@ -3,4 +3,4 @@ ghc: 7.8.3
 before_script: cd HaskellWebapp
 env:
    global:
-      - TRAVIS_BUILD_DIR: `pwd`/HaskellWebapp
+   - TRAVIS_BUILD_DIR: `pwd`/HaskellWebapp
