@@ -3,5 +3,4 @@ ghc: 7.8.3
 before_script: cd HaskellWebapp
 env:
    global:
-      - REPO = "Lxrd-AJ/HaskellWebapp"
-      - CI_HOME = `pwd`/HaskellWebapp/$REPO
+      - TRAVIS_BUILD_DIR: `pwd`/HaskellWebapp
