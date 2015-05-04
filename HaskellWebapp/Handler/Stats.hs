@@ -30,7 +30,6 @@ getStatsR = do
 	returnJson $ object 
 		[ "sum" .= getSum (stripEntities temps) ,
 		  "total" .= (length temps) ,
-		  "test" .= ("I was runnning through the 6 with my woes" :: Text) ,
 		  "highest" .= getHottest (stripEntities temps) ,
 		  "lowest" .= getCoolest (stripEntities temps) ,
 		  "average" .= getAverage (stripEntities temps) 
@@ -41,7 +40,6 @@ getSum [] = 0
 getSum (x:xs) = (temperature x) + getSum xs
 
 getHottest :: [Temperature] -> Temperature
---getHottest ls = maximum ls --FIXME: Bug here, santa mariá would you work!!
 getHottest [] = error "Cannot work on an empty list"    -- getHottest xs = maximum . stripEntities xs
 getHottest [x] = x 
 getHottest (x:xs) = max x (getHottest xs)
